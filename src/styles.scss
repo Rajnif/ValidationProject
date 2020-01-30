@@ -1,0 +1,61 @@
+
+*{
+  outline: none;
+}
+
+/***** MIXINS margin padding *****/
+@for $i from 0 through 40 {
+  .mt-#{$i}{
+    margin-top: #{$i}px;
+  }
+  .mb-#{$i}{
+    margin-bottom: #{$i}px;
+  }
+  .ml-#{$i}{
+    margin-left: #{$i}px;
+  }
+  .mr-#{$i}{
+    margin-right: #{$i}px;
+  }
+  .pt-#{$i}{
+    padding-top: #{$i}px;
+  }
+  .pb-#{$i}{
+    padding-bottom: #{$i}px;
+  }
+  .pl-#{$i}{
+    padding-left: #{$i}px;
+  }
+  .pr-#{$i}{
+    padding-right: #{$i}px;
+  }
+}
+
+
+/***** Error Class *****/
+.has-error{
+  label{
+    color: #e32722;
+  }
+  input, textarea, select{
+    border: 1px solid #e32722;
+      color: #e32722;
+  }
+  .error{
+    color: #e32722;
+    padding-top: 4px;
+    font-size: 13px;
+  }
+}
+.container--100px{
+  width: calc(100% - 100px);
+}
+.container-height{
+  height: calc(100vh - 60px);
+}
+
+ul, li{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

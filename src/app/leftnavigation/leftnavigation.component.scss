@@ -1,0 +1,29 @@
+.left-nav{
+  width:100px;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  font-size: 13px;
+  ul{
+    li{
+      line-height: 60px;
+      text-align: center;
+      position: relative;
+      cursor: pointer;
+      &::after{
+        content: '';
+        position: absolute;
+      border-bottom: 1px solid #ccc;
+      bottom: 0px;
+      width: 60px;
+      left: 20px;
+      }
+      &:hover, &.active{
+        background-color: #e4e7e9;
+        &::after{
+          width: 99px;
+          left: 0px;
+        }
+    }
+    }
+  }
+}
