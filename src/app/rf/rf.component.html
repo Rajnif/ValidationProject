@@ -1,33 +1,50 @@
 
 <div class="container mt-30">
   <h2 class="text-center mb-30 text-primary">Reactive Form Validation</h2>
-  <form action=" ">
-    <div class="form-group row">
-      <div class="col-4" >
-      <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter name" required name="name">
+  <form [formGroup]="formName" (ngSubmit)="onSubmit()">
+
+    <div class="form-group" >
+      <label for="fullName">Name:</label>
+      <input type="text" class="form-control" id="fullName" formControlName="fullName">
       <div class="error">Error Goes here</div>
     </div>
 
-    <div class="col-4" [class.has-error] ="">
+    <div class="form-group">
       <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email"  name="email">
+      <input type="email" class="form-control" id="email"  formControlName="email" name="email">
       <div class="error">Error Goes here</div>
     </div>
+    <div formGroupName ="skills">
+      <div class="form-group">
+      <div class="col-6 float-left">
+        <label for="skillName">Skill Name</label>
+        <input type="text" class="form-control" id="skillName" formControlName="skillName">
+        </div>
 
-    <div class="col-4 has-error">
+        <div class="col-6 float-left">
+          <label for="experienceYears">Experience Years </label>
+      <input type="text" class="form-control" id="experienceYears" formControlName="experienceYears">
+        </div>
+      </div>
+        <div class="form-group">
+        <label for="">Proficiency</label>
+        <input type="radio" value="biginner" formControlName="proficiency">Biginner
+        <input type="radio" value="intermediater" formControlName="proficiency">intermediater
+        <input type="radio" value="advanced" formControlName="proficiency">advanced
+      </div>
+    </div>
+<!-- 
+    <div class="form-group">
       <label for="pwd">Password:</label>
       <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
       <div class="error">Error Goes here</div>
     </div>
-    </div>
-    <div class="form-group has-error">
+    <div class="form-group">
       <label for="comment">Comment:</label>
       <textarea class="form-control" rows="3" id="comment"></textarea>
       <div class="error">Error Goes here</div>
     </div>
-    <div class="row">
-      <div class="col-6 ">
+      <div class="form-group">
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>
     </div>
@@ -47,7 +64,7 @@
     </div>
     </div>
 
-    </div>
+  
     <div class="form-group has-error">
       <label for="sel1">Select list:</label>
       <select class="form-control" id="sel1">
@@ -57,7 +74,33 @@
         <option>4</option>
       </select>
       <div class="error">Error Goes here</div>
-    </div>
-    <button type="submit" class="btn btn-info">Submit</button>
+    </div> -->
+    
+    <div class="footer-nav">
+      <div class="btn-toolbar">
+      <button type="submit" class="btn btn-info">Submit</button>
+    <button type="button" class="btn btn-danger" (click)="loadDataClick()">load data</button>
+  </div>
+</div>
+    <table border="1" style="margin-top: 20px;">
+      <tr>
+        <td>form Group</td>
+        <td>Form Control</td>
+      </tr>
+      <tr style="padding: 5px;">
+      <td>touched: {{ formName.touched }}
+        <br> dirty: {{ formName.dirty }}
+        <br> valid: {{ formName.valid }}
+        <br> full name value: {{ formName.value | json }}
+        </td>
+        <td>touched: {{ formName.get('fullName').touched }}
+          <br> dirty: {{ formName.get('fullName').dirty }}
+          <br> valid: {{ formName.get('fullName').valid }}
+          <br> full name value: {{ formName.get('fullName').value }}
+          </td>
+      </tr>
+    </table>
   </form>
 </div>
+
+

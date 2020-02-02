@@ -1,6 +1,5 @@
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
 import { FormcomponentComponent } from './formcomponent/formcomponent.component';
 import { TdfComponent } from './tdf/tdf.component';
 import { RfComponent } from './rf/rf.component';
