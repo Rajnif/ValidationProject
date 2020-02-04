@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
@@ -23,17 +23,17 @@ formName : FormGroup;
     // })
 
     this.formName = this.fb.group({
-      fullName : [''],
-      email : [''],
+      fullName : ['',[Validators.required,Validators.minLength(2),Validators.maxLength(20)] ],
+      email : ['', [Validators.required, Validators.email]],
       skills : this.fb.group({
         skillName : [''],
         experienceYears :[''],
         proficiency:['biginner']
       })
-    })
-<<<<<<< HEAD
-=======
+    });
   }
+
+
   loadDataClick(): void{
 this.formName.patchValue({
   fullName :'rajni farswan',
@@ -42,27 +42,9 @@ this.formName.patchValue({
     skillName :'angular',
     experienceYears:'4',
     proficiency : 'intermediater'
-
->>>>>>> b73771d71ed9e4763eeffcc4e4fda073650971da
   }
-  loadDataClick(): void{
-this.formName.patchValue({
-  fullName :'rajni farswan',
-  email: 'rajni@gmail.com',
-  skills:{
-    skillName :'angular',
-    experienceYears:'4',
-    proficiency : 'intermediater'
-
-<<<<<<< HEAD
-  }
-
 })
-  } 
-=======
-})
-  }
->>>>>>> b73771d71ed9e4763eeffcc4e4fda073650971da
+  };
   onSubmit(): void{
     console.log(this.formName.touched);
     console.log(this.formName.value);

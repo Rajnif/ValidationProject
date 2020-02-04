@@ -3,17 +3,30 @@
   <h2 class="text-center mb-30 text-primary">Reactive Form Validation</h2>
   <form [formGroup]="formName" (ngSubmit)="onSubmit()">
 
-    <div class="form-group" >
+    <div class="form-group" [ngClass]="{'has-error': formName.get('fullName').errors 
+    && (formName.get('fullName').touched || formName.get('fullName').dirty) }" >
       <label for="fullName">Name:</label>
       <input type="text" class="form-control" id="fullName" formControlName="fullName">
-      <div class="error">Error Goes here</div>
+     
+      <div class="error" *ngIf="formName.get('fullName').errors 
+      && (formName.get('fullName').touched || formName.get('fullName').dirty)">
+      <span *ngIf ="formName.get('fullName').errors.required">This field is required.</span>
+      <span *ngIf ="formName.get('fullName').errors.minlength || formName.get('fullName').errors.maxlength">
+        Full name must be greater then 2 characters and less then 20 characters.</span>
     </div>
 
-    <div class="form-group">
+    </div>
+
+    <div class="form-group" [ngClass] ="{'has-error': formName.get('email').errors && (formName.get('email').touched || formName.get('email').dirty)}">
       <label for="email">Email:</label>
       <input type="email" class="form-control" id="email"  formControlName="email" name="email">
-      <div class="error">Error Goes here</div>
+      <div class="error" *ngIf ="formName.get('email').errors && (formName.get('email').touched || formName.get('email').dirty)">
+        <span *ngIf ="formName.get('email').errors.required">This field is required.</span>
+        <span *ngIf ="formName.get('email').errors.email">Wrong email formate.</span>
+      </div>
+
     </div>
+
     <div formGroupName ="skills">
       <div class="form-group">
       <div class="col-6 float-left">
@@ -33,48 +46,7 @@
         <input type="radio" value="advanced" formControlName="proficiency">advanced
       </div>
     </div>
-<!-- 
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-      <div class="error">Error Goes here</div>
-    </div>
-    <div class="form-group">
-      <label for="comment">Comment:</label>
-      <textarea class="form-control" rows="3" id="comment"></textarea>
-      <div class="error">Error Goes here</div>
-    </div>
-      <div class="form-group">
-    <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Remember me</label>
-    </div>
-    <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Remember me2</label>
-    </div>
-    </div>
-    <div class="col-6">
-    <div class="radio">
-      <label><input type="radio" name="optradio" checked>Option 1</label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="optradio">Option 2</label>
-    </div>
-    <div class="radio disabled">
-      <label><input type="radio" name="optradio" disabled>Option 3</label>
-    </div>
-    </div>
 
-  
-    <div class="form-group has-error">
-      <label for="sel1">Select list:</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-      <div class="error">Error Goes here</div>
-    </div> -->
     
     <div class="footer-nav">
       <div class="btn-toolbar">
