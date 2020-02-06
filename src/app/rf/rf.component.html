@@ -1,6 +1,7 @@
 
 <div class="container mt-30">
   <h2 class="text-center mb-30 text-primary">Reactive Form Validation</h2>
+  <span>{{fullNameLength}}</span>
   <form [formGroup]="formName" (ngSubmit)="onSubmit()">
 
     <div class="form-group" [ngClass]="{'has-error': formName.get('fullName').errors 
@@ -32,6 +33,7 @@
       <div class="col-6 float-left">
         <label for="skillName">Skill Name</label>
         <input type="text" class="form-control" id="skillName" formControlName="skillName">
+        
         </div>
 
         <div class="col-6 float-left">
