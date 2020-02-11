@@ -9,6 +9,7 @@ import { TdfComponent } from './tdf/tdf.component';
 import { RfComponent } from './rf/rf.component';
 import { LeftnavigationComponent } from './leftnavigation/leftnavigation.component';
 import { HeaderComponent } from './header/header.component';
+import { DynamicAddRemoveComponent } from './dynamic-add-remove/dynamic-add-remove.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HeaderComponent } from './header/header.component';
     TdfComponent,
     RfComponent,
     LeftnavigationComponent,
-    HeaderComponent
+    HeaderComponent,
+    DynamicAddRemoveComponent
   ],
   imports: [
     BrowserModule,

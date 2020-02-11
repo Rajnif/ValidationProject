@@ -1,0 +1,40 @@
+<div class="container mt-30">
+    <h2 class="text-center mb-30 text-info">Dynamic Form Validation</h2>
+    <span>{{fullNameLength}}</span>
+    <form [formGroup]="formName" (ngSubmit)="onSubmit()">
+
+        <div class="form-group" [ngClass]="{'has-error': formErrors.fullName }" >
+            <label for="fullName">Name:</label>
+            <input type="text" class="form-control" id="fullName" formControlName="fullName" (blur) =logKeyValidationErrors()>
+            <div class="error" *ngIf = "formErrors.fullName">{{formErrors.fullName}}</div>
+          </div>
+
+          <div class="form-group" [ngClass] ="{'has-error': formErrors.contact }">
+            <label for="" class="pr-20">Contact:</label>
+            <input type="radio" value="phone" class="mr-10" formControlName="contact">Phone
+            <input type="radio" value="emailadd" class="mr-10 ml-25" formControlName="contact">Email
+
+            <div class="error" *ngIf= "formErrors.contact">{{formErrors.contact}}</div>
+          </div>
+
+          <div class="form-group" [ngClass] ="{'has-error': formErrors.email }">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email"  formControlName="email" name="email" (blur) =logKeyValidationErrors()>
+            <div class="error" *ngIf= "formErrors.email">{{formErrors.email}}</div>
+          </div>
+
+          <div class="form-group" [ngClass] ="{'has-error': formErrors.phone }">
+            <label for="email">Phone:</label>
+            <input type="tel" class="form-control" id="phone"  formControlName="phone" name="phone" (blur) =logKeyValidationErrors()>
+            <div class="error" *ngIf= "formErrors.phone">{{formErrors.phone}}</div>
+          </div>
+
+          <div class="footer-nav">
+            <div class="btn-toolbar mb-20">
+            <button type="submit" class="btn btn-info mr-20">Submit</button>
+          <button type="button" class="btn btn-danger" (click)="loadDataClick()">load data</button>
+        </div>
+        </div>
+
+        </form>
+        </div>

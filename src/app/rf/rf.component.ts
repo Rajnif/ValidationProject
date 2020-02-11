@@ -9,7 +9,35 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 })
 export class RfComponent implements OnInit {
 formName : FormGroup;
-fullNameLength = 0;
+//fullNameLength = 0;
+validationMessage ={
+  'fullName' : {
+    'required': 'Full name is required.',
+    'minlength': ' Full name must be greater then 2 characters.',
+    'maxlength': ' Full name must be less then 20 characters.',
+  },
+  'email' : {
+    'required':'email is required.',
+  },
+  'skillName' :{
+    'required': 'Skill name is required.',
+  },
+  'experienceYears' :{
+    'required': 'experience Years is required.',
+  },
+  'proficiency' :{
+
+    'required': 'proficiency is required.',
+  }
+};
+formErrors = {
+  'fullName' : '',
+  'email' : '',
+  'skillName' :'',
+  'experienceYears':'',
+  'proficiency' : ''
+};
+
   constructor( private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -26,32 +54,46 @@ fullNameLength = 0;
 
     this.formName = this.fb.group({
       fullName : ['',[Validators.required,Validators.minLength(2),Validators.maxLength(20)] ],
-      email : ['', [Validators.required, Validators.email]],
+      email : ['', Validators.required],
       skills : this.fb.group({
-        skillName : [''],
-        experienceYears :[''],
-        proficiency:['biginner']
+        skillName : ['',Validators.required],
+        experienceYears :['',Validators.required],
+        proficiency:['',Validators.required]
       })
     });
     // this.formName.get('fullName').valueChanges.subscribe((value: any) => {
     //   this.fullNameLength = value.length;
     // });
-    this.formName.valueChanges.subscribe((value: any) => {
-      console.log(JSON.stringify(value));
+    this.formName.valueChanges.subscribe((data) => {
+     // console.log(JSON.stringify(value));
+     this.logKeyValidationErrors(this.formName);
     });
   }
-logKeyObjectPairs(group: FormGroup): void{
-Object.keys(group.controls).forEach((key) => {
+logKeyValidationErrors(group: FormGroup = this.formName): void{
+Object.keys(group.controls).forEach((key: string) => {
 const abstractControl = group.get(key);
+
 if( abstractControl instanceof FormGroup){     // to check nested form group
 
   //abstractControl.disable();     // disable all nested form controls
-  this.logKeyObjectPairs(abstractControl);
+  this.logKeyValidationErrors(abstractControl);
 }
 else{
+  this.formErrors[key] = ' ';
  // console.log('key : ' + key + 'value : ' + abstractControl.value);
  //abstractControl.disable();     // disable all form controls
-  abstractControl.markAsDirty();  // dirty form control 
+  //abstractControl.markAsDirty();  // dirty form control 
+if(abstractControl && !abstractControl.valid && (abstractControl.touched || abstractControl.dirty)){
+
+  const message = this.validationMessage[key];
+  //console.log(message);
+  //console.log(abstractControl.errors)
+  for (const errorKey in abstractControl.errors){
+    if(errorKey){
+      this.formErrors[key] += message[errorKey] + ' ';
+    }
+  }
+}
 }
 });
 
@@ -67,12 +109,13 @@ else{
 //     proficiency : 'intermediater'
 //   }
 // })
-this.logKeyObjectPairs(this.formName);
+this.logKeyValidationErrors(this.formName);
+//console.log(this.formErrors);
   };
   onSubmit(): void{
-    console.log(this.formName.touched);
-    console.log(this.formName.value);
-    console.log(this.formName.controls.fullName.touched);
-    console.log(this.formName.get('fullName').value);
+    // console.log(this.formName.touched);
+    // console.log(this.formName.value);
+    // console.log(this.formName.controls.fullName.touched);
+    // console.log(this.formName.get('fullName').value);
   }
 }
